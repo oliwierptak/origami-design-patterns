@@ -14,27 +14,23 @@ Origami is less about inventing new design patterns and more about combining wel
 unified architectural style centered on composition, explicit dependencies, and small, focused components.
 
 ### Composite
-![composite.png](docs/composite.png)
 
 Allows to access simple and complex objects in a unified way.
 Enables to model tree (recursive) data structures.
 The key factor is the supertype shared between both, atomic and aggregated objects.
 
 ### Builder
-![builder.png](docs/builder.png)
 
 Allows to generate Composite structure.
 A Client knows only about some parts that require assembling,
 so it delegates the process to the Builder that knows all the details about creating and storing Composite (product).
 
 ### Iterator
-![iterator.png](docs/iterator.png)
 
 Allows to access its elements without exposing underlying implementation details.
 Enables linear access to elements of the Composite.
 
 ### Visitor
-![visitor.png](docs/visitor.png)
 
 Allows to separate object behavior from its structure.
 Enables shape-based access to elements of the Composite.
