@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="tests/bootstrap.php"
+         cacheDirectory=".phpunit.cache"
+         executionOrder="depends,defects"
+         requireCoverageMetadata="false"
+         beStrictAboutCoverageMetadata="true"
+         beStrictAboutOutputDuringTests="true"
+         displayDetailsOnPhpunitDeprecations="true"
+         failOnPhpunitDeprecation="true"
+         failOnRisky="true"
+         failOnWarning="true"
+         colors="true">
+    <coverage>
+        <report>
+            <clover outputFile="./tests/logs/coverage.xml"/>
+            <html outputDirectory="./tests/logs/coverage"/>
+        </report>
+    </coverage>
+    <testsuites>
+        <testsuite name="TestSuite">
+            <directory>tests/suite</directory>
+        </testsuite>
+    </testsuites>
+    <logging>
+        <testdoxHtml outputFile="./tests/logs/testdox.html"/>
+    </logging>
+    <groups>
+        <exclude>
+            <group>skip</group>
+        </exclude>
+    </groups>
+    <source>
+        <include>
+            <directory>./src/</directory>
+        </include>
+        <exclude>
+            <file>src/Component/Action/DefaultAction.php</file>
+        </exclude>
+    </source>
+
+</phpunit>

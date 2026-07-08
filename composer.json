@@ -1,0 +1,36 @@
+{
+  "name": "oliwierptak/origami-design-patterns",
+  "version": "1.0.0",
+  "description": "A prototype implementation of origami design patterns for recursive data structures",
+  "type": "library",
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "require": {
+    "php": "^8.5"
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^8",
+    "phpunit/phpunit": "^13"
+  },
+  "autoload": {
+    "psr-4": {
+      "DesignPatterns\\Origami\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "TestDesignPatterns\\Origami\\": "tests/suite"
+    }
+  },
+  "scripts": {
+    "tests": [
+      "vendor/bin/phpunit --no-coverage --testdox"
+    ],
+    "tests-c": [
+      " XDEBUG_MODE=coverage vendor/bin/phpunit --testdox --coverage-text"
+    ],
+    "popo": [
+      "vendor/bin/popo generate -s popo/"
+    ]
+  }
+}

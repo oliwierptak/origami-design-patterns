@@ -1,0 +1,16 @@
+services:
+  cli:
+    extends:
+      service: cli
+      file: ../docker-compose.yml
+    working_dir: /app/origami-design-patterns
+
+  clix:
+    extends:
+      service: clix
+      file: ../docker-compose.yml
+    working_dir: /app/origami-design-patterns
+
+networks:
+  localdev:
+    driver: bridge
