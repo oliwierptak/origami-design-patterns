@@ -78,6 +78,38 @@ class ComponentBuilderTest extends TestCase
      > Cookware | Non-stick_Pans Stainless_Steel_Pots Baking_Trays", $lines);
     }
 
+    public function test_iterate_with_null_actions_preserves_catalog(): void
+    {
+       $root = $this->builder->getProduct();
+
+       $root->iterate();
+
+       $visitor = new FormattedListVisitor();
+       $root->accept($visitor);
+
+       $this->assertEquals([
+           "Shop",
+           "  Electronics",
+           "    Mobile Phones",
+           "      Android Phones",
+           "      iPhones",
+           "      Budget Phones",
+           "    Laptops & Computers",
+           "      Laptops",
+           "      Desktops",
+           "      Accessories",
+           "  Home & Kitchen",
+           "    Kitchen Appliances",
+           "      Air Fryers",
+           "      Mixers & Blenders",
+           "      Toasters",
+           "    Cookware",
+           "      Non-stick Pans",
+           "      Stainless Steel Pots",
+           "      Baking Trays",
+       ], $visitor->getResult());
+    }
+
     public function test_only_one_root(): void
     {
         $this->expectException(InvalidArgumentException::class);
