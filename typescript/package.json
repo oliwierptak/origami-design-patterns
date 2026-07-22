@@ -1,0 +1,17 @@
+{
+  "name": "origami-design-patterns-typescript-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:typescript": "jest --runInBand",
+    "test:typescript:coverage": "jest --runInBand --coverage",
+    "typecheck:typescript": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.1.0",
+    "jest": "^30.0.5",
+    "ts-jest": "^29.4.1",
+    "typescript": "^5.9.2"
+  }
+}

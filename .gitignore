@@ -106,3 +106,4 @@ temp/
 *.tar
 *.gz
 ```
+/php/tests/logs/testdox.html
