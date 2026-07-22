@@ -11,28 +11,28 @@ It uses the following Gang of Four (GoF) concepts:
 - Visitor
 
 Origami is less about inventing new design patterns and more about combining well-known object-oriented patterns into
-unified architectural style centered on composition, explicit dependencies, and small, focused components.
+ a unified architectural style centered on composition, explicit dependencies, and small, focused components.
 
 ### Composite
 
-Allows to access simple and complex objects in a unified way.
-Enables to model tree (recursive) data structures.
+Enables access to simple and complex objects in a unified way.
+Enables modeling tree (recursive) data structures.
 The key factor is the supertype shared between both, atomic and aggregated objects.
 
 ### Builder
 
-Allows to generate Composite structure.
-A Client knows only about some parts that require assembling,
-so it delegates the process to the Builder that knows all the details about creating and storing Composite (product).
+Allows building a Composite structure.
+A client knows only about the parts that require assembling,
+so it delegates the process to the Builder that knows all the details about creating and storing the Composite (product).
 
 ### Iterator
 
-Allows to access its elements without exposing underlying implementation details.
+Allows access to elements without exposing underlying implementation details.
 Enables linear access to elements of the Composite.
 
 ### Visitor
 
-Allows to separate object behavior from its structure.
+Allows separation of object behavior from its structure.
 Enables shape-based access to elements of the Composite.
 
 ## Example Application: Product Catalog
@@ -67,21 +67,21 @@ Shop
 
 ### Composite (Item, Section)
 
-The `Item` has a title, while the `Section` has title, and collection of subcomponents.
+The `Item` has a title, while the `Section` has a title and a collection of subcomponents.
 
 ### Builder (ComponentBuilder)
 
-The Product Catalog is build only with `Section` and `Item` components.
+The Product Catalog is built only with `Section` and `Item` components.
 The nested hierarchy is represented by `parentId` identifier, linking Sections and Items as children of existing
 components.
 
 ### Iterator (ItemIterator, SectionIterator)
 
-The composite can be iterated with  *internal* iterator, that could modify any `Item` component.
+The composite can be iterated using an *internal* traversal that can modify any `Item` component.
 
 ### Visitor (FormattedListVisitor, TextVisitor)
 
-The composite can also be iterated with  *external* iterator, that should not modify any `Item` components.
+The composite can also be traversed using a visitor, which should not modify any `Item` components.
 
 ## Usage Example
 
@@ -89,9 +89,12 @@ The composite can also be iterated with  *external* iterator, that should not mo
 
 Formatted Product Catalog structure, where section names are uppercased, and item names are quoted.
 
+
 ```php
+$builder = new ComponentBuilder();
+// ... build the product catalog
 $visitor = new FormattedListVisitor();
-$product = (new ComponentBuilder)->getProduct();
+$product = $builder->getProduct();
 
 $product->iterate(new ConvertToUpperCase, new AddQuotes);
 $product->accept($visitor);
@@ -125,14 +128,16 @@ SHOP
 
 Product Catalog as text, where spaces were replaced with underscores in section and item names.
 
-```php
-$visitor = new TextVisitor();
-$product = (new ComponentBuilder)->getProduct();
+```typescript
+const builder = new ComponentBuilder();
+// ... build the product catalog
+const visitor = new TextVisitor();
+const product = builder.getProduct();
 
-$product->iterate(new ConvertSpaceToUnderscore, new ConvertSpaceToUnderscore);
-$product->accept($visitor);
+product.iterate(new ConvertSpaceToUnderscore(), new ConvertSpaceToUnderscore());
+product.accept(visitor);
 
-$output = $visitor->getResult();
+const output = visitor.getResult();
 ```
 
 ```
@@ -158,3 +163,4 @@ $output = $visitor->getResult();
 "Origami" Design Patterns promote building software from small, composable, loosely coupled components,
 simplifying complex applications by making them easier to understand, test, maintain, and extend.
 
+See code examples for [PHP](php) and [TypeScript](typescript).
