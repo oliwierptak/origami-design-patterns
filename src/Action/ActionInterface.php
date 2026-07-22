@@ -6,5 +6,5 @@ use DesignPatterns\Origami\Item\ItemInterface;
 
 interface ActionInterface
 {
-    public function apply(ItemInterface $item);
+    public function apply(ItemInterface $item): void;
 }

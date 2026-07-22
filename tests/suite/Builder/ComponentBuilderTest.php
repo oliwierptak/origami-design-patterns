@@ -110,6 +110,15 @@ class ComponentBuilderTest extends TestCase
         $this->builder->addItem("Item 1", 123);
     }
 
+    public function test_parent_must_exist_before_items_can_be_added(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessageIs('Invalid parentId');
+
+        $this->builder = new ComponentBuilder();
+        $this->builder->addItem("Item 1", 0);
+    }
+
     protected function setUp(): void
     {
         parent::setUp();

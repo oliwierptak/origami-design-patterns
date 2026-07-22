@@ -14,8 +14,10 @@ class SectionIterator implements IteratorInterface
 
     public function iterate(?ActionInterface $sectionAction = null, ?ActionInterface $itemAction = null): void
     {
-        $sectionAction = $sectionAction === null ? new DefaultAction() : $sectionAction;
-        $itemAction = $itemAction === null ? new DefaultAction() : $itemAction;
+        static $defaultAction = new DefaultAction();
+
+        $sectionAction = $sectionAction === null ? $defaultAction : $sectionAction;
+        $itemAction = $itemAction === null ? $defaultAction : $itemAction;
 
         $this->iterateOverSection($sectionAction);
 
@@ -26,6 +28,6 @@ class SectionIterator implements IteratorInterface
 
     private function iterateOverSection(ActionInterface $sectionAction): void
     {
-        $this->section->getItem()->iterate($sectionAction, $sectionAction); //interesting...
+        $sectionAction->apply($this->section->getItem());
     }
 }

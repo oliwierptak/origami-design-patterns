@@ -23,6 +23,9 @@ class ComponentBuilder implements BuilderInterface
         return $this->addComponent(new Item($title), $parentId);
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     private function addComponent(ComponentInterface $component, int $parentId): int
     {
         $this->validate($parentId);
@@ -39,24 +42,26 @@ class ComponentBuilder implements BuilderInterface
         $section = $this->components[$parentId];
         $section->addComponent($component);
 
-        $this->components[$parentId] = $section;
         $this->components[$this->currentId] = $component;
 
         return $this->currentId++;
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     private function validate(int $parentId): void
     {
         if ($parentId === -1 && count($this->components) > 0) {
             throw new InvalidArgumentException('Duplicated root');
         }
 
-        if (isset($this->components[$parentId]) && $this->components[$parentId] instanceof ItemInterface) {
-            throw new InvalidArgumentException('Cannot add Item to another Item');
+        if ($parentId >= 0 && !isset($this->components[$parentId])) {
+            throw new InvalidArgumentException('Invalid parentId');
         }
 
-        if ($parentId > 0 && !isset($this->components[$parentId])) {
-            throw new InvalidArgumentException('Invalid parentId');
+        if (isset($this->components[$parentId]) && $this->components[$parentId] instanceof ItemInterface) {
+            throw new InvalidArgumentException('Cannot add Item to another Item');
         }
     }
 
