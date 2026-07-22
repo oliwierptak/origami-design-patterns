@@ -5,8 +5,10 @@ namespace TestDesignPatterns\Origami\Builder;
 use DesignPatterns\Origami\Action\AddQuotes;
 use DesignPatterns\Origami\Action\ConvertSpaceToUnderscore;
 use DesignPatterns\Origami\Action\ConvertToUpperCase;
+use DesignPatterns\Origami\Action\DefaultAction;
 use DesignPatterns\Origami\Builder\BuilderInterface;
 use DesignPatterns\Origami\Builder\ComponentBuilder;
+use DesignPatterns\Origami\Item\Item;
 use DesignPatterns\Origami\Visitor\FormattedListVisitor;
 use DesignPatterns\Origami\Visitor\TextVisitor;
 use InvalidArgumentException;
@@ -117,6 +119,15 @@ class ComponentBuilderTest extends TestCase
 
         $this->builder = new ComponentBuilder();
         $this->builder->addItem("Item 1", 0);
+    }
+
+    public function test_default_action_does_not_change_item_title(): void
+    {
+        $item = new Item("Item 1");
+
+        new DefaultAction()->apply($item);
+
+        $this->assertEquals("Item 1", $item->getTitle());
     }
 
     protected function setUp(): void
