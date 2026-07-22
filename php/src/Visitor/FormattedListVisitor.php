@@ -4,7 +4,6 @@ namespace DesignPatterns\Origami\Visitor;
 
 use DesignPatterns\Origami\Item\ItemInterface;
 use DesignPatterns\Origami\Section\SectionInterface;
-use DesignPatterns\Origami\Visitor\VisitorInterface;
 
 class FormattedListVisitor implements VisitorInterface
 {

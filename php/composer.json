@@ -19,18 +19,18 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "TestDesignPatterns\\Origami\\": "tests/suite"
+      "TestDesignPatterns\\Origami\\": "../tests/suite"
     }
   },
   "scripts": {
     "tests": [
-      "vendor/bin/phpunit --no-coverage --testdox"
+      "./vendor/bin/phpunit --no-coverage --testdox"
     ],
     "tests-c": [
-      " XDEBUG_MODE=coverage vendor/bin/phpunit --testdox --coverage-text"
+      " XDEBUG_MODE=coverage ./vendor/bin/phpunit --testdox --coverage-text"
     ],
     "popo": [
-      "vendor/bin/popo generate -s popo/"
+      "./vendor/bin/popo generate -s popo/"
     ]
   }
 }
